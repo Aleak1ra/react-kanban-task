@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -23,7 +24,7 @@ function App() {
       ...tasks,
       {
         title: taskTitle,
-        id: Math.random(10),
+        id: uuidv4(),
         completed: false,
       },
     ];
