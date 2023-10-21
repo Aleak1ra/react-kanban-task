@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import "./App.css";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
+import Header from "./components/Header";
+import TaskDetails from "./components/TaskDetails";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
@@ -48,13 +51,33 @@ function App() {
   };
 
   return (
-    <>
+    <Router>
       <div className="container">
-        <AddTask handleTaskAddition={handleTaskAddition} />
+        <Header />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <AddTask handleTaskAddition={handleTaskAddition} />
+                <Tasks
+                  tasks={tasks}
+                  handleTaskClick={handleTaskClick}
+                  handleTaskDeletion={handleTaskDeletion}
+                />
+              </>
+            }
+          />
 
-        <Tasks tasks={tasks} handleTaskClick={handleTaskClick} handleTaskDeletion={handleTaskDeletion} />
+          <Route
+            path="/:taskTitle"
+            Component={TaskDetails}
+          />
+
+          
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 
