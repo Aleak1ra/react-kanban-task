@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import "./App.css";
 import Tasks from "./components/Tasks";
@@ -21,6 +22,14 @@ function App() {
       completed: true,
     },
   ]);
+
+  useEffect(() => {    //if you want to use api data
+   
+    const fetchTasks = async () => {
+
+      const reponse = await axios.get('https://jsonplaceholder.cypress.io/todos?_limit=10')
+    }
+  }, []);
 
   const handleTaskClick = (taskId) => {
     const newTasks = tasks.map((task) => {
@@ -56,7 +65,7 @@ function App() {
         <Header />
         <Routes>
           <Route
-            path="/"
+            path=""
             element={
               <>
                 <AddTask handleTaskAddition={handleTaskAddition} />
